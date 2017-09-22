@@ -72,6 +72,7 @@ Task("Pack")
 
 Task("Push")
     .Description("Pushes the NuGet package to nuget.org.")
+    .IsDependentOn("Pack")
     .Does(() => {
         var packages = GetFiles("./nuget/*.nupkg");
 
