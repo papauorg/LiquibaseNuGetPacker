@@ -15,7 +15,7 @@ var version = Argument("packageVersion", GetVersionFromFile(url));
 const string downloadDir = "./download/";
 const string extractDir = "./extracted/";
 const string nugetOutDir = "./nuget";
-
+const string nugetRepository = "https://www.nuget.org/api/v2/package";
 // helpers
 private string GetVersionFromFile(string fileName)
 {
@@ -73,7 +73,12 @@ Task("Pack")
 Task("Push")
     .Description("Pushes the NuGet package to nuget.org.")
     .Does(() => {
-        
+        var packages = GetFiles("./nuget/*.nupkg");
+
+        NuGetPush(packages, new NuGetPushSettings {
+            Source = nugetRepository,
+            ApiKey = apiKey
+        });
     });
 
 Task("Default")
