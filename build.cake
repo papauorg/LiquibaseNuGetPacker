@@ -8,7 +8,7 @@ var target = Argument("target", "Default");
 // arguments
 var url = Argument<string>("url");
 var fileName = new Uri(url).Segments.Last();
-var apiKey = Argument<string>("api-key");
+var apiKey = Argument<string>("api-key", "");
 var version = Argument("packageVersion", GetVersionFromFile(url));
 
 // variables
@@ -74,6 +74,11 @@ Task("Push")
     .Description("Pushes the NuGet package to nuget.org.")
     .IsDependentOn("Pack")
     .Does(() => {
+        if (string.IsNullOrEmpty(apiKey)) 
+        {
+            throw new Exception("The api-key parameter is required to push a package.");
+        }
+
         var packages = GetFiles("./nuget/*.nupkg");
 
         NuGetPush(packages, new NuGetPushSettings {
