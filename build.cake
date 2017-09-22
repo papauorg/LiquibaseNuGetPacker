@@ -62,7 +62,6 @@ Task("Pack")
     .Does(() => {
         var nuGetPackSettings   = new NuGetPackSettings {
             Version                 = version,
-            // ReleaseNotes         = new [] {"Bug fixes", "Issue fixes", "Typos"},
             NoPackageAnalysis       = true,
             OutputDirectory         = nugetOutDir
         };
@@ -74,7 +73,7 @@ Task("Pack")
 Task("Push")
     .Description("Pushes the NuGet package to nuget.org.")
     .Does(() => {
-
+        
     });
 
 Task("Default")
