@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
-        <id>Liquibase</id>
+        <id>Liquibase.Cli</id>
         <version>$version$</version>
         <description>
-            LiquiBase is an open source, database-independent library for tracking, 
-            managing and applying database changes. It is built on a simple premise: 
-            All database changes are stored in a human readable yet trackable 
-            form and checked into source control.
+            LiquiBase is an open source, database-independent library for tracking, managing and applying database changes. It is built on a simple premise: All database changes are stored in a human readable yet trackable form and checked into source control.
         </description>
         <authors>Nathan Voxland</authors>
         <owners>papauorg</owners> <!-- add Nathans username here -->
