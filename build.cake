@@ -1,22 +1,40 @@
 #addin nuget:?package=SharpZipLib
 #addin nuget:?package=Cake.Compression
 
+using System.Text.RegularExpressions;
+
 var target = Argument("target", "Default");
 
 // arguments
 var url = Argument<string>("url");
+var fileName = new Uri(url).Segments.Last();
 var apiKey = Argument<string>("api-key");
+var version = Argument("packageVersion", GetVersionFromFile(url));
 
 // variables
 const string downloadDir = "./download/";
 const string extractDir = "./extracted/";
+const string nugetOutDir = "./nuget";
 
-var fileName = new Uri(url).Segments.Last();
+// helpers
+private string GetVersionFromFile(string fileName)
+{
+    var versionMatch = Regex.Match(fileName, @"liquibase-(([0-9]+\.)+[0-9]+)");
+    if (versionMatch.Success)
+    {
+        return versionMatch.Groups[1].Value;
+    } else
+    {
+        return "0.0.0.0";
+    }
+}
 
+// tasks
 Task("Clean")
     .Description("Cleans the working dir to start in a fresh environment.")
     .Does(() => {
         CleanDirectory(extractDir);
+        CleanDirectory(nugetOutDir);
     });
 
 Task("Prepare")
@@ -42,7 +60,15 @@ Task("Pack")
     .Description("Packs the liquibase distribution in a nuget package.")
     .IsDependentOn("Prepare")
     .Does(() => {
-        
+        var nuGetPackSettings   = new NuGetPackSettings {
+            Version                 = version,
+            // ReleaseNotes         = new [] {"Bug fixes", "Issue fixes", "Typos"},
+            NoPackageAnalysis       = true,
+            OutputDirectory         = nugetOutDir
+        };
+
+        var nuspecFiles = GetFiles("./Liquibase.nuspec");
+        NuGetPack(nuspecFiles, nuGetPackSettings);
     });
 
 Task("Push")
