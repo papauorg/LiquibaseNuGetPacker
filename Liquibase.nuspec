@@ -7,7 +7,7 @@
             LiquiBase is an open source, database-independent library for tracking, managing and applying database changes. It is built on a simple premise: All database changes are stored in a human readable yet trackable form and checked into source control.
         </description>
         <authors>Nathan Voxland</authors>
-        <owners>papauorg</owners> <!-- add Nathans username here -->
+        <owners>papauorg,nvoxland</owners>
         <projectUrl>http://www.liquibase.org/</projectUrl>
         <licenseUrl>https://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
         <!-- <iconUrl></iconUrl> didn't find an icon in good quality and format at a static location -->
