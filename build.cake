@@ -60,13 +60,16 @@ Task("Pack")
     .Description("Packs the liquibase distribution in a nuget package.")
     .IsDependentOn("Prepare")
     .Does(() => {
+		
+		CopyFile("./Liquibase.nuspec", extractDir + "Liquibase.nuspec");
+		
         var nuGetPackSettings   = new NuGetPackSettings {
             Version                 = version,
             NoPackageAnalysis       = true,
             OutputDirectory         = nugetOutDir
         };
 
-        var nuspecFiles = GetFiles("./Liquibase.nuspec");
+        var nuspecFiles = GetFiles(extractDir + "Liquibase.nuspec");
         NuGetPack(nuspecFiles, nuGetPackSettings);
     });
 
