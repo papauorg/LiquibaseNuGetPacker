@@ -14,18 +14,18 @@ The most important targets for the script are:
 ## Usage
 Windows:
 ```powershell
-./build.ps1 -Target Pack --url https://liquibase/download/url/file-version.tar.gz
+./build.ps1 --target=Pack --url=https://liquibase/download/url/file-version.tar.gz
 ```
 or (for directly pushing after creating the package)
 ```powershell
-./build.ps1 -Target Push --url https://liquibase/download/url/file-version.tar.gz --api-key "your-api-key"
+./build.ps1 --target=Push --url=https://liquibase/download/url/file-version.tar.gz --api-key "your-api-key"
 ```
 
 Linux:
 ```bash
-./build.sh --target=Pack ---url=https://liquibase/download/url/file-version.tar.gz
+./build.sh --target=Pack --url=https://liquibase/download/url/file-version.tar.gz
 ```
 or (for directly pushing after creating the package)
 ```bash
-./build.sh --target=Push ---url=https://liquibase/download/url/file-version.tar.gz --api-key="your-api-key"
+./build.sh --target=Push --url=https://liquibase/download/url/file-version.tar.gz --api-key="your-api-key"
 ```
