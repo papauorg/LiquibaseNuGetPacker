@@ -1,0 +1,28 @@
+name: Create NuGet Package for Liquibase Release
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Liquibase version for which the NuGet package should be built'
+        required: true
+        default: '4.5.0'
+      releaseUrl:
+        description: 'Base url where liquibase packages can be found'
+        required: false
+        default: 'https://github.com/liquibase/liquibase/releases/download/'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: build.sh --target=Pack --url=${{ github.event.inputs.releaseUrl }}v${{ github.event.inputs.version }}/liquibase-${{ github.event.inputs.version }}.tar.gz
