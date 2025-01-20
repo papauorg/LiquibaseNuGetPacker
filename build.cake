@@ -1,6 +1,8 @@
 #addin nuget:?package=SharpZipLib
 #addin nuget:?package=Cake.Compression
 
+#tool "nuget:?package=NuGet.CommandLine&version=6.12.2"
+
 using System.Text.RegularExpressions;
 
 var target = Argument("target", "Default");
