@@ -62,17 +62,16 @@ Task("Pack")
     .Description("Packs the liquibase distribution in a nuget package.")
     .IsDependentOn("Prepare")
     .Does(() => {
-		
-		CopyFile("./Liquibase.nuspec", extractDir + "Liquibase.nuspec");
-		
-        var nuGetPackSettings   = new NuGetPackSettings {
-            Version                 = version,
-            NoPackageAnalysis       = true,
-            OutputDirectory         = nugetOutDir
+
+        var dotnetBuildSettings = new DotNetBuildSettings
+        {
+            Configuration = "Release",
+            //NoPackageAnalysis = true,
+            OutputDirectory = nugetOutDir,
+            ArgumentCustomization = a => a.Append($"-p:Version={version}").Append($"-p:NuspecBasePath={extractDir}")
         };
 
-        var nuspecFiles = GetFiles(extractDir + "Liquibase.nuspec");
-        NuGetPack(nuspecFiles, nuGetPackSettings);
+        DotNetBuild("Liquibase.csproj", dotnetBuildSettings);
     });
 
 Task("Push")

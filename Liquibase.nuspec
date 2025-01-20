@@ -9,7 +9,7 @@
         <authors>Nathan Voxland</authors>
         <owners>papauorg,nvoxland</owners>
         <projectUrl>http://www.liquibase.org/</projectUrl>
-        <licenseUrl>https://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+        <licence src="LICENCE.txt" />
         <!-- <iconUrl></iconUrl> didn't find an icon in good quality and format at a static location -->
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <tags>liquibase database migration</tags>

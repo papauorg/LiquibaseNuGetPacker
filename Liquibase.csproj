@@ -1,0 +1,17 @@
+<!-- 
+This Project file is only necessary to use the custom nuspec file to create the nuget package with dotnet pack. 
+It is not actually a C# project -->
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <NuspecFile>Liquibase.nuspec</NuspecFile>
+    <NoBuild>true</NoBuild>
+    <NuspecProperties>$(NuspecProperties);version=$(Version)</NuspecProperties>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <NuspecBasePath></NuspecBasePath>
+    <SkipCompilerExecution>true</SkipCompilerExecution>
+    <CopyBuildOutputToOutputDirectory>false</CopyBuildOutputToOutputDirectory>
+  </PropertyGroup>
+
+</Project>
