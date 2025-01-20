@@ -1,8 +1,6 @@
 #addin nuget:?package=SharpZipLib
 #addin nuget:?package=Cake.Compression
 
-#tool "nuget:?package=NuGet.CommandLine&version=6.12.2"
-
 using System.Text.RegularExpressions;
 
 var target = Argument("target", "Default");
@@ -83,12 +81,13 @@ Task("Push")
             throw new Exception("The api-key parameter is required to push a package.");
         }
 
-        var packages = GetFiles("./nuget/*.nupkg");
-
-        NuGetPush(packages, new NuGetPushSettings {
+        var settings = new DotNetNuGetPushSettings
+        {
             Source = nugetRepository,
             ApiKey = apiKey
-        });
+        };
+
+        DotNetNuGetPush($"{nugetOutDir}/*.nupkg", settings);
     });
 
 Task("Default")
