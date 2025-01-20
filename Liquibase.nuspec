@@ -16,6 +16,6 @@
     </metadata>
     
     <files>
-        <file src="**" target="tools" exclude="sdk/**;sdk/*;**/sdk/*" />
+        <file src="**" target="tools" exclude="sdk/**;sdk/*;**/sdk/*;examples/**;internal/extensions/liquibase-checks.jar" />
     </files>
 </package>
