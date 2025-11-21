@@ -4,14 +4,23 @@ It is not actually a C# project -->
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <NuspecFile>Liquibase.nuspec</NuspecFile>
-    <NoBuild>true</NoBuild>
-    <NuspecProperties>$(NuspecProperties);version=$(Version)</NuspecProperties>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <PackAsTool>true</PackAsTool>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <NuspecBasePath></NuspecBasePath>
-    <SkipCompilerExecution>true</SkipCompilerExecution>
-    <CopyBuildOutputToOutputDirectory>false</CopyBuildOutputToOutputDirectory>
+    <PackageId>Liquibase.Cli</PackageId>    
+    <Authors>Nathan Voxland</Authors>
+    <Owners>papauorg,nvoxland</Owners>
+    <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
+    <Description>LiquiBase is an open source, database-independent library for tracking, managing and applying database changes. It is built on a simple premise: All database changes are stored in a human readable yet trackable form and checked into source control.</Description>
+    <PackageProjectUrl>http://www.liquibase.org/</PackageProjectUrl>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+     <PackageTags>liquibase database migration</PackageTags>
   </PropertyGroup>
 
+	<ItemGroup>
+		<None Include="extracted/LICENSE.txt" Pack="true" Visible="false" PackagePath="." />
+		<None Include="extracted/**/*.*" Pack="true" PackagePath="tools" Exclude="extracted/sdk/**/*.*;sdk/*;**/sdk/*;extracted/examples/**/*.*;internal/extensions/liquibase-checks.jar" />
+	</ItemGroup>
 </Project>

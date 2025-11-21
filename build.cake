@@ -1,5 +1,5 @@
-#addin nuget:?package=SharpZipLib
-#addin nuget:?package=Cake.Compression
+#addin nuget:?package=SharpZipLib&version=1.4.2
+#addin nuget:?package=Cake.Compression&version=0.4.0
 
 using System.Text.RegularExpressions;
 
@@ -61,12 +61,16 @@ Task("Pack")
     .IsDependentOn("Prepare")
     .Does(() => {
 
+        var msBuildSettings = new DotNetMSBuildSettings()
+	    {
+		    Version = version,
+	    }.WithProperty("PackageOutputPath",nugetOutDir);
+
         var dotnetBuildSettings = new DotNetBuildSettings
         {
             Configuration = "Release",
-            //NoPackageAnalysis = true,
-            OutputDirectory = nugetOutDir,
-            ArgumentCustomization = a => a.Append($"-p:Version={version}").Append($"-p:NuspecBasePath={extractDir}")
+            //NoPackageAnalysis = true,           
+            MSBuildSettings = msBuildSettings            
         };
 
         DotNetBuild("Liquibase.csproj", dotnetBuildSettings);
